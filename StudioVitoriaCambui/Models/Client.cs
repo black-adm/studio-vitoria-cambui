@@ -7,4 +7,6 @@ public class Client
     public string? FirstName { get; set; }
     public string? LastName{ get; set; }
     public Email Email { get; }
+    public Phone Phone { get; }
+    public Password Password { get; }
 }
