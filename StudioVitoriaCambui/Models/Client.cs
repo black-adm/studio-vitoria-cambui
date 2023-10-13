@@ -1,23 +1,33 @@
-namespace StudioVitoriaCambui.Models;
-
+using StudioVitoriaCambui.Enums;
 using StudioVitoriaCambui.ValueObjects;
 
-public class Client
+namespace StudioVitoriaCambui.Models
 {
-    public int Id { get; set; }
-    public string? FirstName { get; set; }
-    public string? LastName{ get; set; }
-    public Email Email { get; }
-    public Phone Phone { get; }
-    public Password Password { get; }
-
-    public Client(int id, string firstName, string lastName, Email email, Phone phone, Password password)
+    public class Client
     {
-        Id = id;
-        FirstName = firstName;
-        LastName = lastName;
-        Email = email;
-        Phone = phone;
-        Password = password;
+        public Guid Id { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public Email Email { get; set; }
+        public Phone Phone { get; set; }
+        public Password Password { get; set; }
+        public StatusClient Status { get; set; }
+
+        public Client()
+        {
+            Id = Guid.NewGuid();
+            Status = StatusClient.notDeleted & StatusClient.notBlocked;
+        }
+
+        public Client(string firstName, string lastName, Email email, Phone phone, Password password, StatusClient statusClient)
+        {
+            Id = Guid.NewGuid();
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            Phone = phone;
+            Password = password;
+            Status = statusClient;
+        }
     }
 }
