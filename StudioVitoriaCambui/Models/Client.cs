@@ -1,16 +1,26 @@
+using Postgrest.Attributes;
+using Postgrest.Models;
 using StudioVitoriaCambui.Enums;
 using StudioVitoriaCambui.ValueObjects;
 
 namespace StudioVitoriaCambui.Models
 {
-    public class Client
+    [System.ComponentModel.DataAnnotations.Schema.Table("clients")]
+    public class Client : BaseModel
     {
+        [PrimaryKey("id", false)]
         public Guid Id { get; set; }
+        [Column("first_name")]
         public string? FirstName { get; set; }
+        [Column("last_name")]
         public string? LastName { get; set; }
+        [Column("email")]
         public Email Email { get; set; }
+        [Column("phone")]
         public Phone Phone { get; set; }
+        [Column("password")]
         public Password Password { get; set; }
+        [Column("status_client")]
         public StatusClient Status { get; set; }
 
         public Client()

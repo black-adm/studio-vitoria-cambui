@@ -2,8 +2,8 @@ namespace StudioVitoriaCambui.Enums;
 
 public enum StatusClient
 {
-    isDeleted,
-    notDeleted,
-    isBlocked,
-    notBlocked
+    isDeleted = 0,
+    notDeleted = 1,
+    isBlocked = 2,
+    notBlocked = 3
 }
