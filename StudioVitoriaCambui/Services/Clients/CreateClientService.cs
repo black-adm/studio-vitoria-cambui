@@ -29,7 +29,6 @@ public class CreateClientService
         {
             return newClient.Id;
         }
-
         throw new Exception("Falha ao cadastrar cliente!");
     }
 }
