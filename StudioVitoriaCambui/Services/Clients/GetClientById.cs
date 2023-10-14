@@ -1,25 +1,43 @@
+using Microsoft.AspNetCore.Mvc;
+using StudioVitoriaCambui.Contracts;
+using StudioVitoriaCambui.Interfaces;
 using StudioVitoriaCambui.Models;
 
 namespace StudioVitoriaCambui.Services.Clients
 {
-    public class GetClientById
+    public class GetClientById : IClientService
     {
-        private readonly List<Client> _clients; 
+        private readonly Supabase.Client _supabaseClient;
 
-        public GetClientById(List<Client> clients) 
+        public GetClientById(Supabase.Client supabaseClient)
         {
-            _clients = clients;
+            _supabaseClient = supabaseClient;
         }
 
-        public Client GetClient(Guid clientId)
+        public async Task<ActionResult<ClientResponse>> GetClientId(Guid id)
         {
-            Client client = _clients.FirstOrDefault(c => c.Id == clientId);
+            var response = await _supabaseClient
+                .From<Client>()
+                .Where(c => c.Id == id)
+                .Get();
 
-            if (client == null)
+            var clients = response.Models.FirstOrDefault();
+
+            if (clients is null)
             {
-                throw new Exception("Usuário não encontrado!");
+                return new NotFoundResult();
             }
-            return client;
+
+            var clientResponse = new ClientResponse
+            {
+                Id = clients.Id,
+                FirstName = clients.FirstName,
+                LastName = clients.LastName,
+                Email = clients.Email,
+                Phone = clients.Phone,
+                Password = clients.Password,
+            };
+            return new OkObjectResult(clientResponse);
         }
     }
 }

@@ -1,7 +1,7 @@
 using StudioVitoriaCambui.Config;
 using StudioVitoriaCambui.Contracts;
+using StudioVitoriaCambui.Interfaces;
 using StudioVitoriaCambui.Services.Clients;
-using Supabase;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 builder.Services.ConfigureSupabase(builder.Configuration);
+builder.Services.AddScoped<IClientService, GetClientById>();
 
 var app = builder.Build();
 
@@ -29,12 +30,19 @@ app.MapPost("clients", async (
     }
 );
 
+app.MapGet("/users/{id}", async (
+    Guid id, IClientService clientService) =>
+{
+    var result = await clientService.GetClientId(id);
+    return result;
+});
+
+app.UseHttpsRedirection();
+app.UseAuthorization();
+app.MapControllers();
 app.UseCors(corsBuilder => corsBuilder
     .SetIsOriginAllowed(_ => true)
     .AllowAnyMethod()
     .AllowAnyHeader()
     .AllowCredentials());
-app.UseHttpsRedirection();
-app.UseAuthorization();
-app.MapControllers();
 app.Run();
