@@ -5,11 +5,11 @@ using StudioVitoriaCambui.Models;
 
 namespace StudioVitoriaCambui.Services.Clients
 {
-    public class GetClientById : IClientService
+    public class GetClientByIdService : IClientService
     {
         private readonly Supabase.Client _supabaseClient;
 
-        public GetClientById(Supabase.Client supabaseClient)
+        public GetClientByIdService(Supabase.Client supabaseClient)
         {
             _supabaseClient = supabaseClient;
         }
@@ -17,7 +17,7 @@ namespace StudioVitoriaCambui.Services.Clients
         public async Task<ActionResult<ClientResponse>> GetClientId(Guid id)
         {
             var response = await _supabaseClient
-                .From<Client>()
+                .From<UserClient>()
                 .Where(c => c.Id == id)
                 .Get();
 
@@ -35,7 +35,6 @@ namespace StudioVitoriaCambui.Services.Clients
                 LastName = clients.LastName,
                 Email = clients.Email,
                 Phone = clients.Phone,
-                Password = clients.Password,
             };
             return new OkObjectResult(clientResponse);
         }
