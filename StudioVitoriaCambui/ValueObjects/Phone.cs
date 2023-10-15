@@ -1,5 +1,9 @@
+using Newtonsoft.Json;
+using StudioVitoriaCambui.Converters;
+
 namespace StudioVitoriaCambui.ValueObjects;
 
+[JsonConverter(typeof(PhoneConverter))]
 public class Phone
 {
     public string Contact { get; }

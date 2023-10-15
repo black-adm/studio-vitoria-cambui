@@ -1,8 +1,12 @@
+using Newtonsoft.Json;
+using StudioVitoriaCambui.Converters;
+
 namespace StudioVitoriaCambui.ValueObjects
 {
+    [JsonConverter(typeof(EmailConverter))]
     public class Email
     {
-        private string Address { get; }
+        public string Address { get; }
 
         public Email(string address)
         {

@@ -1,10 +1,14 @@
 using System.Security.Cryptography;
+using Newtonsoft.Json;
 using System.Text;
+using StudioVitoriaCambui.Converters;
 
 namespace StudioVitoriaCambui.ValueObjects
 {
+    [JsonConverter(typeof(PasswordConverter))]
     public class Password
     {
+        [JsonIgnore] 
         public string HashPassword { get; }
 
         public Password(string plainPassword)
