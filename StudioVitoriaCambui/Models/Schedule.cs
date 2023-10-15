@@ -5,13 +5,13 @@ namespace StudioVitoriaCambui.Models;
 public class Schedule
 {
     public Guid Id { get; set; }
-    public Client Client { get; set; }
+    public UserClient UserClient { get; set; }
     public DateTime Date { get; set; }
     public StatusAppointments StatusAppointments { get; set; }
     
-    public Schedule(Client client, DateTime date, StatusAppointments statusAppointments)
+    public Schedule(UserClient userClient, DateTime date, StatusAppointments statusAppointments)
     {
-        Client = client;
+        UserClient = userClient;
         Date = date;
         StatusAppointments = statusAppointments;
     }
