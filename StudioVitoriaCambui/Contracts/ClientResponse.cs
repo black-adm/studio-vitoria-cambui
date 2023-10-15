@@ -9,5 +9,4 @@ public class ClientResponse
     public string? LastName { get; set; }
     public Email? Email { get; set; }
     public Phone? Phone { get; set; }
-    public Password? Password { get; set; }
 }

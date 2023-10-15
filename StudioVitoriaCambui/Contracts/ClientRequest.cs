@@ -1,23 +1,24 @@
 using System.ComponentModel.DataAnnotations;
+using StudioVitoriaCambui.ValueObjects;
 
 namespace StudioVitoriaCambui.Contracts;
 
 public class ClientRequest
 {
     [Required]
-    public string FirstName { get; set; }
+    public string? FirstName { get; set; }
 
     [Required]
-    public string LastName { get; set; }
+    public string? LastName { get; set; }
 
     [Required]
     [EmailAddress]
-    public string Email { get; set; }
+    public Email? Email { get; set; }
 
     [Required]
     [Phone]
-    public string Phone { get; set; }
-
+    public Phone? Phone { get; set; }
+    
     [Required]
-    public string Password { get; set; }
+    public string? Password { get; set; }
 }

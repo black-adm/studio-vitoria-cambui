@@ -12,17 +12,18 @@ public class CreateClientService
         Supabase.Client supabaseClient
     )
     {
-        var clients = new Client
+        var clients = new UserClient
         {
+            Id = Guid.NewGuid(),
             FirstName = request.FirstName,
             LastName = request.LastName,
-            Email = new Email(request.Email),
-            Phone = new Phone(request.Phone),
-            Password = new Password(request.Password),
-            Status = StatusClient.notDeleted & StatusClient.notBlocked
+            Email = request.Email,
+            Phone = request.Phone,
+            Password = request.Password,
+            Status = StatusClient.notDeleted
         };
 
-        var response = await supabaseClient.From<Client>().Insert(clients);
+        var response = await supabaseClient.From<UserClient>().Insert(clients);
         var newClient = response.Models.FirstOrDefault();
 
         if (newClient != null)
